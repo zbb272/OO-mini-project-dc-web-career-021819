@@ -43,7 +43,7 @@ puts cookie_recipe.users == [zach, sean]
 # - `Recipe#ingredients`
 # should return all of the ingredients in this recipe
 puts "Recipe#ingredients: "
-puts cookie_recipe.ingredients == [flour, sugar]
+puts cookie_recipe.ingredients == [flour, sugar, water]
 # - `Recipe#allergens`
 # should return all of the ingredients in this recipe that are allergens
 puts "Recipe#allergens: "
@@ -51,8 +51,8 @@ puts cookie_recipe.allergens == [water]
 # - `Recipe#add_ingredients`
 # should take an array of ingredient instances as an argument, and associate each of those ingredients with this recipe
 puts "Recipe#add: "
-# cake_recipe.add_ingredients([sugar, love])
-# puts cake_recipe.ingredients == [sugar, love]
+cake_recipe.add_ingredients([sugar, love])
+puts cake_recipe.ingredients == [sugar, love]
 
 puts "-----------"
 puts "User Tests"

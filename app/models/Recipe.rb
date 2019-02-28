@@ -15,9 +15,10 @@ class Recipe
   def self.most_popular
     # should return the recipe instance with the highest number of users
     # (the recipe that has the most recipe cards)
-    RecipeCard.all.sort do | recipe_card |
+
+    RecipeCard.all.max_by do | recipe_card |
       recipe_card.recipe.recipe_count
-    end[-1]
+    end.recipe
 
   end
 
@@ -29,21 +30,37 @@ class Recipe
 
   def users
     # should return the user instances who have recipe cards with this recipe
-    RecipeCard.all.select { |card| card.user == self }.map { |user_card| user_card.user }
+    RecipeCard.all.select do |recipe_card|
+      recipe_card.recipe == self
+    end.map do |user_card|
+      user_card.user
+    end.uniq
   end
 
   def ingredients
     # should return all of the ingredients in this recipe
-    RecipeIngredient.all.select {|ri| ri.recipe == self}.map {|ri| ri.ingredient}
+    RecipeIngredient.all.select do |recipe_ingredient|
+      recipe_ingredient.recipe == self
+    end.map do |recipe_ingredient|
+      recipe_ingredient.ingredient
+    end
   end
 
   def allergens
     #should return all of the ingredients in this recipe that are allergens
-
+    Allergen.all.select do | allergen |
+      ingredients.include?(allergen.ingredient)
+    end.map do |allergen|
+      allergen.ingredient
+    end.uniq 
   end
 
-  def add_ingredients
-    #should take an array of ingredient instances as an argument, and associate each of those ingredients with this recipe
+  def add_ingredients(ingredient_array)
+    #should take an array of ingredient instances as an argument, and associate
+    #each of those ingredients with this recipe
+    ingredient_array.each do | new_ingredient |
+      RecipeIngredient.new(self, new_ingredient)
+    end
   end
 
 end
