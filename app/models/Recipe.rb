@@ -15,7 +15,8 @@ class Recipe
   def self.most_popular
     # should return the recipe instance with the highest number of users
     # (the recipe that has the most recipe cards)
-    RecipeCard.all.map {|rcard| rcard.recipe}.max
+    array = RecipeCard.all.map {|rcard| rcard.recipe}
+    array.max_by { |i| array.count(i) }
   end
 
   def recipe_count

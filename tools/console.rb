@@ -16,6 +16,10 @@ zach_cookie_recipe_card = RecipeCard.new("02-27-2019", 9, zach, cookie_recipe)
 sean_cookie_recipe_card = RecipeCard.new("02-27-2019", 9, sean, cookie_recipe)
 
 water_allergy = Allergen.new(water, zach)
+water_allergy = Allergen.new(water, sean)
+love_allergy = Allergen.new(love, sean)
+love_allergy = Allergen.new(love, User.new("brad"))
+love_allergy = Allergen.new(love, User.new("Phil"))
 
 cookie_recipe_ingredient_flour = RecipeIngredient.new(cookie_recipe, flour)
 cookie_recipe_ingredient_sugar = RecipeIngredient.new(cookie_recipe, sugar)
