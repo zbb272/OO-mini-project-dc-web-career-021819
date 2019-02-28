@@ -43,7 +43,7 @@ puts cookie_recipe.users == [zach, sean]
 # - `Recipe#ingredients`
 # should return all of the ingredients in this recipe
 puts "Recipe#ingredients: "
-puts cookie_recipe.ingredients == [flour, sugar]
+puts cookie_recipe.ingredients == [flour, sugar, water]
 # - `Recipe#allergens`
 # should return all of the ingredients in this recipe that are allergens
 puts "Recipe#allergens: "
