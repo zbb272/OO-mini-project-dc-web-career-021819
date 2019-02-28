@@ -12,10 +12,12 @@ love = Ingredient.new("Love")
 zach = User.new("Zach")
 sean = User.new("Sean")
 
-zach_cookie_recipe_card = RecipeCard.new("02-27-2019", 9, zach, cookie_recipe)
-sean_cookie_recipe_card = RecipeCard.new("02-27-2019", 9, sean, cookie_recipe)
+zach_cookie_recipe_card = RecipeCard.new("20190227", 9, zach, cookie_recipe)
+sean_cookie_recipe_card = RecipeCard.new("20190227", 9, sean, cookie_recipe)
 
 water_allergy = Allergen.new(water, zach)
+water_allergy_sean = Allergen.new(water, sean)
+love_allergy = Allergen.new(love, sean)
 
 cookie_recipe_ingredient_flour = RecipeIngredient.new(cookie_recipe, flour)
 cookie_recipe_ingredient_sugar = RecipeIngredient.new(cookie_recipe, sugar)
@@ -64,16 +66,40 @@ puts "-----------"
 # should return all of the user instances
 # - `User#recipes`
 # should return all of the recipes this user has recipe cards for
+puts "User#recipes: "
+puts zach.recipes == [zach_cookie_recipe_card]
 # - `User#add_recipe_card`
 # should accept a recipe instance as an argument, as well as a date and rating, and create a new recipe card for this user and the given recipe
+puts "User#add_recipe_card: "
+new_recipe_card = zach.add_recipe_card("20190227", 9, cake_recipe)
+puts RecipeCard.all.include?(new_recipe_card)
 # - `User#declare_allergen`
-# should accept an ingredient instance as an argument, and create a new allergen instance for this user and the given ingredient
+# should accept an ingredient instance as an argument, and create a new allergen
+ # instance for this user and the given ingredient
+puts "User#declare_allergen: "
+new_allergy = zach.declare_allergen(flour)
+puts new_allergy.class == Allergen && new_allergy.user == zach
+
 # - `User#allergens`
 # should return all of the ingredients this user is allergic to
+puts "User#allerges: "
+puts sean.allergens == [water, love]
 # - `User#top_three_recipes`
+#zach_cookie_recipe_card = RecipeCard.new("20190227", 9, zach, cookie_recipe)
+#new_recipe_card = zach.add_recipe_card("20190227", 9, cake_recipe)
+apple_recipe = Recipe.new("Apple")
+potato_recipe = Recipe.new("Potato")
+zach_apple_recipe_card = RecipeCard.new("20190227", 5, zach, apple_recipe)
+zach_potato_recipe_card = RecipeCard.new("20190228", 3, zach, potato_recipe)
+
+puts "User#top_three_recipes: "
+puts zach.top_three_recipes == zach.recipes.sort_by! {|recipe_card| recipe_card.rating }.reverse[0..2]
 # should return the top three highest rated recipes for this user.
 # - `User#most_recent_recipe`
 # should return the recipe most recently added to the user's cookbook.
+
+puts "User#most_recent_recipe: "
+puts zach.most_recent_recipe == potato_recipe
 
 
 puts "-----------"
@@ -105,6 +131,9 @@ puts "-----------"
 # - `Ingredient.most_common_allergen`
 # should return the ingredient instance that the highest number of users are allergic to
 #
+puts "Ingredient.most_common_allergen: "
+puts Ingredient.most_common_allergen == water
+
 puts "-----------"
 puts "RecipeIngredient Tests"
 puts "-----------"
@@ -129,7 +158,7 @@ puts "-----------"
 # - `Allergen.all`
 # should return all of the Allergen instances
 puts "Allergen.all: "
-puts Allergen.all == [water_allergy]
+puts Allergen.all == water_allergy
 
 
 puts "-----------"

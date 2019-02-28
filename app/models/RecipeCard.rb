@@ -12,12 +12,4 @@ class RecipeCard
     @@all
   end
 
-  def date
-
-  end
-
-  def rating
-
-  end
-
 end

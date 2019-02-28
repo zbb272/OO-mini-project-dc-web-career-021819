@@ -9,10 +9,16 @@ class Ingredient
   end
 
   def self.all
-
+    @@all
   end
 
   def self.most_common_allergen
-
-  end 
+    ingredients = Allergen.all.map do | allergen |
+      allergen.ingredient
+    end
+    
+    ingredients.max_by do | ingredient |
+      ingredients.count(ingredient)
+    end
+  end
 end
