@@ -51,8 +51,8 @@ puts cookie_recipe.allergens == [water]
 # - `Recipe#add_ingredients`
 # should take an array of ingredient instances as an argument, and associate each of those ingredients with this recipe
 puts "Recipe#add: "
-# cake_recipe.add_ingredients([sugar, love])
-# puts cake_recipe.ingredients == [sugar, love]
+cake_recipe.add_ingredients([sugar, love])
+puts cake_recipe.ingredients == [sugar, love]
 
 puts "-----------"
 puts "User Tests"

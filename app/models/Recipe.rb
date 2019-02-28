@@ -31,16 +31,28 @@ class Recipe
 
   def ingredients
     # should return all of the ingredients in this recipe
-    RecipeIngredient.all.select {|ri| ri.recipe == self}.map {|ri| ri.ingredient}
+    RecipeIngredient.all.select do |recipe_ingredient|
+      recipe_ingredient.recipe == self
+    end.map do |recipe_ingredient|
+      recipe_ingredient.ingredient
+    end
   end
 
   def allergens
     #should return all of the ingredients in this recipe that are allergens
-
+    Allergen.all.select do | allergen |
+      ingredients.include?(allergen.ingredient)
+    end.map do |allergen|
+      allergen.ingredient
+    end.uniq
   end
 
-  def add_ingredients
-    #should take an array of ingredient instances as an argument, and associate each of those ingredients with this recipe
+  def add_ingredients(ingredient_array)
+    #should take an array of ingredient instances as an argument, and associate
+    #each of those ingredients with this recipe
+    ingredient_array.each do | new_ingredient |
+      RecipeIngredient.new(self, new_ingredient)
+    end
   end
 
 end
