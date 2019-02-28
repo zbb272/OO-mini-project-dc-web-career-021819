@@ -26,7 +26,7 @@ class Recipe
 
   def users
     # should return the user instances who have recipe cards with this recipe
-    RecipeCard.all.select { |card| card.user == self }.map { |user_card| user_card.user }
+    RecipeCard.all.select {|rcard| rcard.recipe == self}.map {|rcard| rcard.user}.uniq
   end
 
   def ingredients
